@@ -19,7 +19,7 @@ def run_agent():
         st.session_state[CHAT_LATEST] = "initialize"
 
     with st.form("chat_form"):
-        user_input = st.text_area(" 質問を入力してください", "", key="input")
+        user_input = st.text_area("質問を入力してください", "", key="input")
         submitted = st.form_submit_button("送信")
         if submitted and st.session_state[CHAT_LATEST] != user_input:
             st.session_state[CHAT_LATEST] = user_input
