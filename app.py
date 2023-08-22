@@ -1,15 +1,26 @@
+import asyncio
+import os
 from typing import List
 
+import gdown
 import streamlit as st
 from streamlit_chat import message
 
 from src.agent import Agent
 from src.chat import CHAT_TYPE_SYSTEM, Chat
 
-CHAT_LATEST: str = "latest_chat"
+GOOGLE_DRIVE_URL = "https://drive.google.com/drive/folders/1Rw0hQYBOb7HrouSi_9axVyy8MbI76UG0?usp=sharing"
+MODEL_PATH = "models/japanese-large-lm-3.6b-instruction-sft/"
+CHAT_LATEST = "latest_chat"
 
 
-def run_agent():
+def download_model() -> None:
+    if not os.path.exists(MODEL_PATH):
+        os.makedirs(MODEL_PATH)
+        gdown.download_folder(GOOGLE_DRIVE_URL, output="models/")
+
+
+def run_agent() -> None:
     """Run chatbot agent"""
     st.title("Chatbot (demo)")
     if "agent" not in st.session_state:
@@ -29,7 +40,7 @@ def run_agent():
         show_conv(conv_history)
 
 
-def show_conv(conv_history: List[Chat]):
+def show_conv(conv_history: List[Chat]) -> None:
     """Show conversation history
     Args:
         conv_history (List[Chat]): conversation history
@@ -41,7 +52,8 @@ def show_conv(conv_history: List[Chat]):
             message(conv_history[i].text, is_user=True, key=str(i) + "_user")
 
 
-def main():
+def main() -> None:
+    download_model()
     run_agent()
 
 

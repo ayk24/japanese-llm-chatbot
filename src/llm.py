@@ -1,21 +1,15 @@
-import os
 from typing import List
 
 import ctranslate2
-import gdown
 from transformers import AutoTokenizer
 
 from .chat import Chat
 
-GOOGLE_DRIVE_URL = "https://drive.google.com/drive/folders/1Rw0hQYBOb7HrouSi_9axVyy8MbI76UG0?usp=sharing"
 MODEL_PATH = "models/japanese-large-lm-3.6b-instruction-sft/"
 
 
 class LLM:
     def __init__(self) -> None:
-        if not os.path.exists(MODEL_PATH):
-            os.makedirs(MODEL_PATH)
-            gdown.download_folder(GOOGLE_DRIVE_URL, output="models/")
         self.generator = ctranslate2.Generator(MODEL_PATH)
         self.tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, use_fast=False)
 
