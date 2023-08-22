@@ -22,6 +22,9 @@ This package requires [poetry](https://python-poetry.org/docs/).
 ```bash
 $ cd japanese-llm-chatbot
 $ poetry install
+$ ct2-transformers-converter --model line-corporation/japanese-large-lm-3.6b-instruction-sft \
+  --copy_files spiece.model tokenizer_config.json special_tokens_map.json \
+  --output_dir ./models/ --quantization int8_bfloat16 --low_cpu_mem_usage \
 ```
 
 ## Refactoring
