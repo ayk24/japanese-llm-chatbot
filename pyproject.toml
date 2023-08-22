@@ -7,6 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.9.7 || >3.9.7,<4.0"
+torch = "^2.0.1"
 transformers = "^4.32.0"
 streamlit = "^1.25.0"
 streamlit-chat = "^0.1.1"
