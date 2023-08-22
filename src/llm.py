@@ -1,6 +1,7 @@
 from typing import List
 
 import ctranslate2
+import streamlit as st
 from transformers import AutoTokenizer
 
 from .chat import Chat
@@ -8,10 +9,22 @@ from .chat import Chat
 MODEL_PATH = "models/japanese-large-lm-3.6b-instruction-sft/"
 
 
+@st.cache_resource
+def load_model():
+    model = ctranslate2.Generator(MODEL_PATH)
+    return model
+
+
+@st.cache_resource
+def load_tokenizer():
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, use_fast=False)
+    return tokenizer
+
+
 class LLM:
     def __init__(self) -> None:
-        self.generator = ctranslate2.Generator(MODEL_PATH)
-        self.tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, use_fast=False)
+        self.generator = load_model()
+        self.tokenizer = load_tokenizer()
 
     def generate_response(self, chat_history: List[Chat]) -> str:
         """Generate response from chat history
