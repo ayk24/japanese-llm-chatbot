@@ -6,7 +6,7 @@ authors = ["ayk24 <aykueym@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.9.7 || >3.9.7,<4.0"
+python = "^3.11"
 torch = "2.0.0"
 transformers = "^4.32.0"
 streamlit = "^1.25.0"
